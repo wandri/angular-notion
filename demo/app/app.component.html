@@ -1,0 +1,11 @@
+@if (title()) {
+  <h1>{{ title() }}</h1>
+}
+@if (recordMap()) {
+  <an-notion
+    [recordMap]="recordMap()!"
+    [fullPage]="true"
+    [darkMode]="false"
+    [rootPageId]="pageId"
+  />
+}

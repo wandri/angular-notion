@@ -11,15 +11,15 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "sourceRoot": "demo",
+      "prefix": "demo",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/angular-notion",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
+            "index": "demo/index.html",
+            "browser": "demo/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -32,9 +32,14 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "demo/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "demo/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -91,9 +96,42 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "demo/styles.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "angular-notion-x": {
+      "projectType": "library",
+      "root": "projects/angular-notion-x",
+      "sourceRoot": "projects/angular-notion-x/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular-notion-x/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-notion-x/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-notion-x/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/angular-notion-x/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
