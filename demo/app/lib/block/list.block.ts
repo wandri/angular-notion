@@ -9,7 +9,7 @@ import { Block, Decoration } from 'notion-types';
 import { NotionContextService } from '../context.service';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { getListNumber } from '../utils';
-import { AnTextComponent } from './text.component';
+import { AnTextComponent } from '../components/text/text';
 
 @Component({
   selector: 'an-wrap-list',
@@ -18,20 +18,23 @@ import { AnTextComponent } from './text.component';
   template: `
     @if (block().type === 'bulleted_list') {
       <ul [ngClass]="['notion-list', 'notion-list-disc', blockId() ?? '']">
-        <ng-content />
+        <ng-container *ngTemplateOutlet="innerContent" />
       </ul>
     } @else {
       <ol
         [ngClass]="['notion-list', 'notion-list-numbered', blockId() ?? '']"
         [start]="start()"
       >
-        <ng-content />
+        <ng-container *ngTemplateOutlet="innerContent" />
       </ol>
     }
+    <ng-template #innerContent>
+      <ng-content />
+    </ng-template>
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,7 +46,7 @@ export class AnWrapListComponent {
 }
 
 @Component({
-  selector: 'an-list',
+  selector: 'an-list-block',
   standalone: true,
   imports: [NgTemplateOutlet, AnTextComponent, NgClass, AnWrapListComponent],
   template: `
@@ -54,10 +57,10 @@ export class AnWrapListComponent {
           [block]="block()"
           [start]="params()!.start"
         >
-          <ng-container *ngTemplateOutlet="output"></ng-container>
+          <ng-container *ngTemplateOutlet="output" />
         </an-wrap-list>
       } @else {
-        <ng-container *ngTemplateOutlet="output"></ng-container>
+        <ng-container *ngTemplateOutlet="output" />
       }
 
       <ng-template #output>
@@ -76,12 +79,12 @@ export class AnWrapListComponent {
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnListComponent {
+export class AnListBlockComponent {
   readonly block = input.required<Block>();
   readonly blockId = input<string | undefined>(undefined);
   private ctx = inject(NotionContextService);

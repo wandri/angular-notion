@@ -11,34 +11,34 @@ import { NgComponentOutlet } from '@angular/common';
 import { formatNotionDateTime } from '../utils';
 import { AnGithubIconComponent } from '../icons/svg-type-github';
 import { AngularComponent } from '../type';
-import { AnMentionPreviewCardComponent } from './mention-preview-card.component';
+import { AnMentionPreviewCardComponent } from '../components/mention-preview-card.component';
+import { AnLinkComponent } from '../components/link/link.component';
 
 @Component({
-  selector: 'an-eoi',
+  selector: 'an-eoi-block',
   standalone: true,
   imports: [
     NgComponentOutlet,
     AnGithubIconComponent,
     AnMentionPreviewCardComponent,
+    AnLinkComponent,
   ],
   template: `
     @if (params()) {
-      <ng-container
-        *ngComponentOutlet="
-          ctx.components()?.Link ?? null;
-          inputs: {
-            className: [
-              'notion-external',
-              this.inline()
-                ? 'notion-external-mention'
-                : 'notion-external-block notion-row',
-              className(),
-            ],
-            href: params()!.original_url,
-            rel: 'noopener noreferrer',
-            target: '_blank',
-          }
+      <an-link
+        [component]="ctx.components().Link ?? null"
+        [className]="
+          [
+            'notion-external',
+            this.inline()
+              ? 'notion-external-mention'
+              : 'notion-external-block notion-row',
+            className(),
+          ].join(' ')
         "
+        [href]="params()!.original_url"
+        rel="noopener noreferrer"
+        target="_blank"
       >
         @if (params()!.isExternalImage) {
           <div class="notion-external-image">
@@ -48,26 +48,26 @@ import { AnMentionPreviewCardComponent } from './mention-preview-card.component'
         <div class="notion-external-description">
           <div class="notion-external-title">{{ params()!.title }}</div>
           @if (params()!.owner || params()!.lastUpdated) {
-            <!--            <an-mention-preview-card-->
-            <!--              [title]="params().title"-->
-            <!--              [owner]="params().owner"-->
-            <!--              [lastUpdated]="params().lastUpdated"-->
-            <!--              [domain]="params().domain"-->
-            <!--              [externalImage]="params()?.isExternalImage"-->
-            <!--            />-->
+            <an-mention-preview-card
+              [title]="params()!.title"
+              [owner]="params()!.owner"
+              [lastUpdated]="params()!.lastUpdated"
+              [domain]="params()!.domain"
+              [externalImage]="params()!.isExternalImage"
+            />
           }
         </div>
-      </ng-container>
+      </an-link>
     }
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnEoiComponent {
+export class AnEoiBlockComponent {
   readonly ctx = inject(NotionContextService);
   readonly block = input.required<Block>();
   readonly inline = input<boolean | undefined>(undefined);

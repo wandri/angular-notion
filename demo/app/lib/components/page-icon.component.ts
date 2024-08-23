@@ -35,35 +35,35 @@ const isIconBlock = (value: Block): value is PageBlock | CalloutBlock => {
     >
       @if (type() === 'image') {
         <an-lazy-image
+          [fill]="false"
           [src]="src()"
           [alt]="alt()"
-          [ngClass]="[className() ?? '', 'notion-page-icon']"
+          [className]="[className(), 'notion-page-icon'].join(' ')"
         />
       } @else if (type() === 'defaultIcon') {
         <an-default-page-icon
-          [ngClass]="[className() ?? '', 'notion-page-icon']"
+          [className]="[className(), 'notion-page-icon'].join(' ')"
         />
       } @else if (type() === 'icon') {
         <span
-          [ngClass]="[className() ?? '', 'notion-page-icon']"
+          [ngClass]="[className(), 'notion-page-icon'].join(' ')"
           role="img"
           [attr.aria-label]="icon()"
+          >{{ icon() }}</span
         >
-          {{ icon() }}
-        </span>
       }
     </div>
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnPageIconComponent {
   readonly block = input.required<Block>();
-  readonly className = input<string | undefined>('');
+  readonly className = input<string>('');
   readonly inline = input<boolean>(true);
   readonly hideDefaultIcon = input<boolean>(false);
   readonly defaultIcon = input<string | undefined>(undefined);

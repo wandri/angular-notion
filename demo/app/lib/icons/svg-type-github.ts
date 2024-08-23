@@ -16,11 +16,11 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnGithubIconComponent {
-  readonly className = input<string | undefined | string[]>('');
+  readonly className = input<string>('');
 }

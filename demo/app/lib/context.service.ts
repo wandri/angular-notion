@@ -7,7 +7,7 @@ import {
   NotionComponents,
   SearchNotionFn,
 } from './type';
-import { defaultNotionContext } from './default-value';
+import { defaultComponents, defaultNotionContext } from './default-value';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +16,7 @@ export class NotionContextService {
   readonly recordMap = signal<ExtendedRecordMap>(
     defaultNotionContext.recordMap,
   );
-  readonly components = signal<Partial<NotionComponents> | undefined>(
-    undefined,
-  );
+  readonly components = signal<Partial<NotionComponents>>(defaultComponents);
   readonly mapPageUrl = signal<MapPageUrlFn>(defaultNotionContext.mapPageUrl);
   readonly mapImageUrl = signal<MapImageUrlFn>(
     defaultNotionContext.mapImageUrl,
@@ -74,7 +72,7 @@ export class NotionContextService {
   readonly defaultPageCoverPosition = signal<number | undefined>(
     defaultNotionContext.defaultPageCoverPosition,
   );
-
+  readonly zoom = signal<boolean>(defaultNotionContext.zoom);
   readonly className = signal<string>('');
   readonly bodyClassName = signal<string | undefined>(undefined);
   readonly header = signal<AngularComponent>(null);

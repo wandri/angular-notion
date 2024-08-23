@@ -1,33 +1,26 @@
 import { NotionComponents, NotionContext } from './type';
 import { defaultMapPageUrl } from './map-page-url';
 import { defaultMapImageUrl } from './map-image-url';
-import { AnAssetWrapperComponent } from './components/asset-wrapper.component';
-import { AnHeaderComponent } from './components/header.component';
+import { AnAssetWrapperBlockComponent } from './block/asset-wrapper.block';
 import { AnCheckboxComponent } from './components/checkbox.component';
-import {
-  AnDefaultLinkComponent,
-  AnDefaultPageLinkComponent,
-} from './components/default-page-link.component';
+import { AnHeaderComponent } from './components/header.component';
 
 function dummyComponent(name: string) {
   console.warn(
-    `Warning: using empty component "${name}" (you should override this in NotionRenderer.components)`,
+    `Warning: using empty component "${name}" (you should override this in components)`,
   );
 
   return null;
 }
 
-const DefaultLink = AnDefaultLinkComponent;
-const DefaultPageLink = AnDefaultPageLinkComponent;
-const DefaultPageLinkMemo = DefaultPageLink;
 const DefaultCheckbox = AnCheckboxComponent;
-const DefaultEmbed = AnAssetWrapperComponent;
+const DefaultEmbed = AnAssetWrapperBlockComponent;
 const DefaultHeader = AnHeaderComponent;
 
 export const defaultComponents: NotionComponents = {
   Image: null, // disable custom images by default
-  Link: DefaultLink,
-  PageLink: DefaultPageLinkMemo,
+  Link: null,
+  PageLink: null,
   Checkbox: DefaultCheckbox,
   Callout: undefined, // use the built-in callout rendering by default
 

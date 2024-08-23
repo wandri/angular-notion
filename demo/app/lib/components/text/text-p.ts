@@ -4,24 +4,28 @@ import { AnPageTitleComponent } from '../page-title.component';
 import { NotionContextService } from '../../context.service';
 import { PageFormat, SubDecoration } from 'notion-types/build/core';
 import { Block } from 'notion-types';
+import { AnPageLinkComponent } from '../link/page-link.component';
 
 @Component({
   selector: 'an-text-p',
-  template: ` <ng-container
-    *ngComponentOutlet="
-      ctx.components()?.PageLink ?? null;
-      inputs: {
-        className: 'notion-link',
-        href: ctx.mapPageUrl()(params().blockId),
+  template: `
+    <an-page-link
+      [component]="ctx.components().PageLink"
+      [href]="ctx.mapPageUrl()(params().blockId)"
+      [className]="'notion-link'"
+    >
+      @if (params().linkedBlock) {
+        <an-page-title [block]="params().linkedBlock!" />
       }
-    "
-  >
-    @if (params().linkedBlock) {
-      <an-page-title [block]="params().linkedBlock!" />
-    }
-  </ng-container>`,
+    </an-page-link>
+  `,
   standalone: true,
-  imports: [NgComponentOutlet, AnPageTitleComponent],
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
+  imports: [NgComponentOutlet, AnPageTitleComponent, AnPageLinkComponent],
 })
 export class AnTextPComponent {
   readonly ctx = inject(NotionContextService);

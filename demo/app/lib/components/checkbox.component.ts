@@ -16,7 +16,7 @@ import { AnSvgCheckComponent } from '../icons/check-icon';
   </span>`,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

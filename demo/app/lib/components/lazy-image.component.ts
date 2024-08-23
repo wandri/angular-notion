@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   inject,
   input,
 } from '@angular/core';
@@ -21,38 +20,52 @@ import { PreviewImage } from 'notion-types/build/maps';
   standalone: true,
   imports: [NgClass, NgComponentOutlet, NgOptimizedImage, NgStyle],
   template: `
-    @if (ctx.components()?.Image) {
+    @if (ctx.components().Image) {
       <ng-container
         *ngComponentOutlet="
-          ctx.components()?.Image ?? null;
+          ctx.components().Image ?? null;
           inputs: previewImage().inputs
         "
       />
     } @else if (src()) {
-      <img
-        [ngSrc]="src()!"
-        [alt]="alt()"
-        fill
-        priority
-        [ngStyle]="style()"
-        [style.object-fit]="'cover'"
-      />
+      @if (fill()) {
+        <img
+          [ngSrc]="src()!"
+          [alt]="alt()"
+          [fill]="fill()"
+          [ngStyle]="style()"
+          [style.object-fit]="'cover'"
+          [ngClass]="className()"
+        />
+      } @else {
+        <img
+          [src]="src()!"
+          [alt]="alt()"
+          [ngStyle]="style()"
+          [ngClass]="className()"
+          loading="lazy"
+          decoding="async"
+        />
+      }
     }
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnLazyImageComponent {
-  readonly src = input<string | undefined>(undefined);
+  readonly fill = input<boolean>(true);
+  readonly src = input<string | undefined | null>(undefined);
   readonly alt = input<string | undefined>(undefined);
   readonly className = input<string>('');
   readonly style = input<Record<string, string> | null | undefined>(undefined);
-  readonly height = input<number | undefined>(undefined);
+  readonly height = input<number | string | undefined>(undefined);
   readonly priority = input<boolean>(false);
+  private contextService = inject(NotionContextService);
+  readonly ctx = this.contextService;
   readonly previewImage = computed<{
     preview: PreviewImage | null | undefined;
     inputs: Record<string, unknown>;
@@ -79,8 +92,6 @@ export class AnLazyImageComponent {
       },
     };
   });
-  private contextService = inject(NotionContextService);
-  readonly ctx = this.contextService;
 
   onLoad() {}
 }

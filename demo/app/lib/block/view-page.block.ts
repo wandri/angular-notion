@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { NotionContextService } from '../context.service';
-import { NgClass, NgComponentOutlet } from '@angular/common';
+import { NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import {
   getBlockCollectionId,
   getBlockIcon,
@@ -15,17 +15,18 @@ import {
   getTextContent,
   isUrl,
 } from 'notion-utils';
-import { AnLazyImageComponent } from './lazy-image.component';
-import { AnPageAsideComponent } from './page-aside.component';
-import { AnPageIconComponent } from './page-icon.component';
-import { AnPageTitleComponent } from './page-title.component';
-import { AnTextComponent } from './text.component';
+import { AnLazyImageComponent } from '../components/lazy-image.component';
+import { AnPageAsideComponent } from '../components/page-aside.component';
+import { AnPageIconComponent } from '../components/page-icon.component';
+import { AnPageTitleComponent } from '../components/page-title.component';
+import { AnTextComponent } from '../components/text/text';
 import * as types from 'notion-types';
 import { Block } from 'notion-types';
 import { AngularComponent } from '../type';
+import { AnPageLinkComponent } from '../components/link/page-link.component';
 
 @Component({
-  selector: 'an-view-page',
+  selector: 'an-view-page-block',
   standalone: true,
   imports: [
     NgClass,
@@ -35,8 +36,11 @@ import { AngularComponent } from '../type';
     AnPageTitleComponent,
     AnTextComponent,
     NgComponentOutlet,
+    NgTemplateOutlet,
+    AnPageLinkComponent,
   ],
-  template: ` @if (level() === 0) {
+  template: `
+    @if (level() === 0) {
       @if (ctx.fullPage()) {
         <div
           [ngClass]="[
@@ -60,25 +64,29 @@ import { AngularComponent } from '../type';
             }
             <ng-container *ngComponentOutlet="header()" />
             <div class="notion-page-scroller">
-              @if (this.fullPageProperties().hasPageCover && this.pageCover()) {
-                <!--              Display this.pageCover()-->
-              } @else {
-                <div class="notion-page-cover-wrapper">
-                  @if (blockFormat().page_cover) {
-                    <an-lazy-image
-                      [src]="
-                        ctx.mapImageUrl()(blockFormat().page_cover!, block()) ??
-                        ''
-                      "
-                      [alt]="
-                        getTextContent(fullPageProperties().property?.title)
-                      "
-                      [priority]="true"
-                      class="notion-page-cover"
-                      [style]="fullPageProperties().pageCoverStyle"
-                    />
-                  }
-                </div>
+              @if (this.fullPageProperties().hasPageCover) {
+                @if (this.pageCover()) {
+                  <ng-container *ngComponentOutlet="this.pageCover() ?? null" />
+                } @else {
+                  <div class="notion-page-cover-wrapper">
+                    @if (blockFormat().page_cover) {
+                      <an-lazy-image
+                        [src]="
+                          ctx.mapImageUrl()(
+                            blockFormat().page_cover!,
+                            block()
+                          ) ?? ''
+                        "
+                        [alt]="
+                          getTextContent(fullPageProperties().property?.title)
+                        "
+                        [priority]="true"
+                        className="notion-page-cover"
+                        [style]="fullPageProperties().pageCoverStyle"
+                      />
+                    }
+                  </div>
+                }
               }
 
               <main
@@ -111,6 +119,8 @@ import { AngularComponent } from '../type';
 
                 <h1 class="notion-title">
                   @if (pageTitle()) {
+                    <ng-container *ngComponentOutlet="pageTitle()" />
+                  } @else {
                     <an-text
                       [value]="fullPageProperties().property?.title ?? []"
                       [block]="block()"
@@ -143,7 +153,7 @@ import { AngularComponent } from '../type';
                     ]"
                   >
                     <article class="notion-page-content-inner">
-                      <ng-content />
+                      <ng-container *ngTemplateOutlet="innerContent" />
                     </article>
                     @if (fullPageProperties().hasAside) {
                       <an-page-aside
@@ -199,39 +209,44 @@ import { AngularComponent } from '../type';
               "
             />
           }
-
           @if (block().type !== 'collection_view_page') {
-            <ng-content />
+            <ng-container *ngTemplateOutlet="innerContent" />
           }
-
           <ng-container *ngComponentOutlet="pageFooter()" />
         </main>
       }
     } @else {
-      <ng-container
-        *ngComponentOutlet="
-          ctx.components()?.PageLink ?? null;
-          inputs: {
-            href: ctx.mapPageUrl()(block().id),
-            className: [
-              'notion-page-link',
-              blockColor() && 'notion-' + blockColor(),
-              blockId(),
-            ],
-          }
+      <an-page-link
+        [className]="
+          [
+            'notion-page-link',
+            blockColor() && 'notion-' + blockColor(),
+            blockId(),
+          ].join(' ')
         "
+        [href]="ctx.mapPageUrl()(block().id)"
+        [component]="ctx.components().PageLink ?? null"
       >
         <an-page-title [block]="block()" />
-      </ng-container>
-    }`,
+      </an-page-link>
+    }
+
+    <ng-template #innerContent>
+      <ng-content />
+    </ng-template>
+
+    <ng-template #innerPageLink>
+      <an-page-title [block]="block()" />
+    </ng-template>
+  `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnViewPageComponent {
+export class AnViewPageBlockComponent {
   readonly ctx = inject(NotionContextService);
   readonly block = input.required<Block>();
   readonly header = input.required<AngularComponent>();

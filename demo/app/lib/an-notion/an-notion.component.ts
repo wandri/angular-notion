@@ -4,7 +4,6 @@ import {
   effect,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { ExtendedRecordMap } from 'notion-types';
 import { NotionContextService } from '../context.service';
@@ -15,25 +14,27 @@ import {
   NotionComponents,
   SearchNotionFn,
 } from '../type';
-import { BlockComponent } from '../block/block.component';
+import { BlockComponent } from '../block.component';
 import { NotionBlockComponent } from '../notion-block/notion-block.component';
-import { defaultNotionContext } from '../default-value';
+import { defaultComponents, defaultNotionContext } from '../default-value';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
 
 @Component({
   selector: 'an-notion',
   standalone: true,
   imports: [BlockComponent, NotionBlockComponent],
-  template: ` <an-notion-block [blockId]="blockId()" [level]="0" /> `,
+  template: ` <an-notion-block [level]="0" /> `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnNotionComponent {
   readonly recordMap = input<ExtendedRecordMap>(defaultNotionContext.recordMap);
-  readonly components = input<Partial<NotionComponents> | undefined>(undefined);
+  readonly components = input<Partial<NotionComponents> | {}>({});
   readonly mapPageUrl = input<MapPageUrlFn>(defaultNotionContext.mapPageUrl);
   readonly mapImageUrl = input<MapImageUrlFn>(defaultNotionContext.mapImageUrl);
   readonly searchNotion = input<SearchNotionFn | undefined>(
@@ -98,6 +99,7 @@ export class AnNotionComponent {
   private contextService = inject(NotionContextService);
 
   constructor() {
+    TimeAgo.addLocale(en);
     effect(
       () => {
         this.contextService.recordMap.set(this.recordMap());
@@ -106,7 +108,10 @@ export class AnNotionComponent {
     );
     effect(
       () => {
-        this.contextService.components.set(this.components());
+        this.contextService.components.set({
+          ...defaultComponents,
+          ...this.components(),
+        });
       },
       { allowSignalWrites: true },
     );

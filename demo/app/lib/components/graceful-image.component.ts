@@ -5,22 +5,34 @@ import {
   input,
 } from '@angular/core';
 import { NotionContextService } from '../context.service';
+import { NgClass, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'an-graceful-image',
   standalone: true,
-  imports: [],
-  template: ``,
+  imports: [NgClass, NgOptimizedImage],
+  template: `
+    @if (src()) {
+      <img
+        [ngSrc]="src()!"
+        fill
+        [alt]="alt()"
+        [ngClass]="className()"
+        [style.object-fit]="'cover'"
+      />
+    }
+  `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnGracefulImageComponent {
-  readonly src = input<string | undefined>(undefined);
+  readonly src = input.required<string | undefined>();
   readonly alt = input<string | undefined>(undefined);
+  readonly loading = input<string | undefined>(undefined);
   readonly className = input<string>('');
   readonly ctx = inject(NotionContextService);
 }

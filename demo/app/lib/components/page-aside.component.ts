@@ -34,9 +34,8 @@ import { NgClass, NgComponentOutlet, NgStyle } from '@angular/common';
                     display: 'inline-block',
                     marginLeft: tocItem.indentLevel * 16,
                   }"
+                  >{{ tocItem.text }}</span
                 >
-                  {{ tocItem.text }}
-                </span>
               </a>
             }
           </nav>
@@ -48,7 +47,7 @@ import { NgClass, NgComponentOutlet, NgStyle } from '@angular/common';
   }`,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

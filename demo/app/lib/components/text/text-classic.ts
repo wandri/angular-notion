@@ -1,6 +1,15 @@
-import { Component, computed, inject, input } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  TemplateRef,
+  viewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { AnEoiComponent } from '../eoi';
+import { AnEoiBlockComponent } from '../../block/eoi.block';
 import { NotionContextService } from '../../context.service';
 import {
   DateFormat,
@@ -18,15 +27,21 @@ import { AnTextAComponent } from './text-a';
   selector: 'an-text-classic',
   template: `
     @if (decorator()[0] === 'p') {
-      <an-text-p [decorator]="decorator()"></an-text-p>
+      <an-text-p [decorator]="decorator()">
+        <ng-container *ngTemplateOutlet="innerContent" />
+      </an-text-p>
     } @else if (decorator()[0] === '‣') {
       <an-text-external-link
         [linkProps]="linkProps()"
         [block]="block()"
         [decorator]="decorator()"
-      ></an-text-external-link>
+      >
+        <ng-container *ngTemplateOutlet="innerContent" />
+      </an-text-external-link>
     } @else if (decorator()[0] === 'h') {
-      <span [ngClass]="['notion-' + decorator()[1]]"><ng-content /></span>
+      <span [ngClass]="['notion-' + decorator()[1]]">
+        <ng-container *ngTemplateOutlet="innerContent" />
+      </span>
     } @else if (decorator()[0] === 'c') {
       <code class="notion-inline-code">
         <ng-container *ngTemplateOutlet="insideComponent" />
@@ -51,11 +66,12 @@ import { AnTextAComponent } from './text-a';
       <ng-container
         *ngComponentOutlet="
           ctx.components()?.Equation ?? null;
+          content: templateRef;
           inputs: { inline: true, math: decorator()[1] }
         "
       />
     } @else if (decorator()[0] === 'm') {
-      <ng-content />
+      <ng-container *ngTemplateOutlet="innerContent" />
     } @else if (decorator()[0] === 'a') {
       <an-text-a
         [linkProtocol]="linkProtocol()"
@@ -66,14 +82,14 @@ import { AnTextAComponent } from './text-a';
       </an-text-a>
     } @else if (decorator()[0] === 'd') {
       @if (dateFormat()) {
-        {{ dateFormat() }}
+        <span>{{ dateFormat() }}</span>
       } @else {
         <ng-container *ngTemplateOutlet="insideComponent" />
       }
     } @else if (decorator()[0] === 'u') {
       <an-text-u [block]="block()" [decorator]="decorator()" />
     } @else if (decorator()[0] === 'eoi' && eoiBlock()) {
-      <an-eoi [block]="eoiBlock()!" [inline]="true"></an-eoi>
+      <an-eoi-block [block]="eoiBlock()!" [inline]="true"></an-eoi-block>
     } @else {
       <ng-container *ngTemplateOutlet="insideComponent" />
     }
@@ -87,11 +103,15 @@ import { AnTextAComponent } from './text-a';
           [block]="block()"
           [decorations]="decorations()"
         >
-          <ng-content />
+          <ng-container *ngTemplateOutlet="innerContent" />
         </an-text-classic>
       } @else {
-        <ng-content />
+        <ng-container *ngTemplateOutlet="innerContent" />
       }
+    </ng-template>
+
+    <ng-template #innerContent>
+      <ng-content />
     </ng-template>
   `,
   standalone: true,
@@ -102,11 +122,16 @@ import { AnTextAComponent } from './text-a';
     AnTextPComponent,
     AnTextExternalLinkComponent,
     AnTextUComponent,
-    AnEoiComponent,
+    AnEoiBlockComponent,
     AnTextAComponent,
   ],
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
 })
-export class AnTextClassicComponent {
+export class AnTextClassicComponent implements OnInit {
   readonly ctx = inject(NotionContextService);
   readonly decorations = input.required<SubDecoration[]>();
   readonly block = input.required<Block>();
@@ -158,4 +183,15 @@ export class AnTextClassicComponent {
       return null;
     }
   });
+
+  readonly vcr = inject(ViewContainerRef);
+  templateRef: any[] = [];
+  readonly template = viewChild.required<TemplateRef<any>>('innerContent');
+
+  ngOnInit() {
+    if (this.decorator()[0] === 'e') {
+      const templateRef = this.template();
+      this.templateRef = [this.vcr.createEmbeddedView(templateRef).rootNodes];
+    }
+  }
 }

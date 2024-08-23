@@ -11,7 +11,7 @@ import { SubDecoration, UserFormat } from 'notion-types/build/core';
   template: `
     @if (userInfo()) {
       <an-graceful-image
-        class="notion-user"
+        className="notion-user"
         [src]="ctx.mapImageUrl()(userInfo()!.user.profile_photo, block()) ?? ''"
         [alt]="userInfo()!.name"
       />
@@ -23,6 +23,11 @@ import { SubDecoration, UserFormat } from 'notion-types/build/core';
     AnGracefulImageComponent,
     forwardRef(() => AnPageTitleComponent),
   ],
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
 })
 export class AnTextUComponent {
   readonly ctx = inject(NotionContextService);

@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'an-default-page-icon',
+  selector: 'an-file-icon',
   standalone: true,
   imports: [NgClass],
   template: `
-    <svg [ngClass]="className()" viewBox="0 0 30 30" width="16">
+    <svg [ngClass]="className()" viewBox="0 0 30 30">
       <path
-        d="M16,1H4v28h22V11L16,1z M16,3.828L23.172,11H16V3.828z M24,27H6V3h8v10h10V27z M8,17h14v-2H8V17z M8,21h14v-2H8V21z M8,25h14v-2H8V25z"
+        d="M22,8v12c0,3.866-3.134,7-7,7s-7-3.134-7-7V8c0-2.762,2.238-5,5-5s5,2.238,5,5v12c0,1.657-1.343,3-3,3s-3-1.343-3-3V8h-2v12c0,2.762,2.238,5,5,5s5-2.238,5-5V8c0-3.866-3.134-7-7-7S6,4.134,6,8v12c0,4.971,4.029,9,9,9s9-4.029,9-9V8H22z"
       ></path>
     </svg>
   `,
@@ -19,8 +19,6 @@ import { NgClass } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnDefaultPageIconComponent {
+export class AnFileIconComponent {
   readonly className = input<string>('');
-
-  constructor() {}
 }

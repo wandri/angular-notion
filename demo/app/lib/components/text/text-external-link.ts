@@ -5,6 +5,7 @@ import { AnGracefulImageComponent } from '../graceful-image.component';
 import { NotionContextService } from '../../context.service';
 import { Block, User } from 'notion-types';
 import { ExternalLinkFormat, SubDecoration } from 'notion-types/build/core';
+import { AnPageLinkComponent } from '../link/page-link.component';
 
 @Component({
   selector: 'an-text-external-link',
@@ -12,7 +13,7 @@ import { ExternalLinkFormat, SubDecoration } from 'notion-types/build/core';
     @if (params().linkType === 'u') {
       @if (userInfo()) {
         <an-graceful-image
-          class="notion-user"
+          className="notion-user"
           [src]="
             ctx.mapImageUrl()(userInfo()!.user.profile_photo, block()) ?? ''
           "
@@ -20,26 +21,31 @@ import { ExternalLinkFormat, SubDecoration } from 'notion-types/build/core';
         />
       }
     } @else {
-      <ng-container
-        *ngComponentOutlet="
-          ctx.components()?.PageLink ?? null;
-          inputs: {
-            className: 'notion-link',
-            href: ctx.mapPageUrl()(params().id),
-            target: '_blank',
-            rel: 'noopener noreferrer',
-            linkProps: linkProps(),
-          }
-        "
+      <an-page-link
+        [component]="ctx.components().PageLink"
+        [className]="'notion-link'"
+        [href]="ctx.mapPageUrl()(params().id)"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         @if (defaultInfo()) {
           <an-page-title [block]="defaultInfo()!" />
         }
-      </ng-container>
+      </an-page-link>
     }
   `,
   standalone: true,
-  imports: [NgComponentOutlet, AnPageTitleComponent, AnGracefulImageComponent],
+  imports: [
+    NgComponentOutlet,
+    AnPageTitleComponent,
+    AnGracefulImageComponent,
+    AnPageLinkComponent,
+  ],
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
 })
 export class AnTextExternalLinkComponent {
   readonly ctx = inject(NotionContextService);

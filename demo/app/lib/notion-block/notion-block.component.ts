@@ -2,20 +2,21 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  forwardRef,
   inject,
   input,
 } from '@angular/core';
-import { BlockComponent } from '../block/block.component';
+import { BlockComponent } from '../block.component';
 import { NotionContextService } from '../context.service';
 
 @Component({
   selector: 'an-notion-block',
   standalone: true,
-  imports: [BlockComponent],
+  imports: [forwardRef(() => BlockComponent)],
   template: `
-    @if (block() && block().value) {
-      <an-block [level]="level()" [block]="block().value!">
-        @for (child of block()!.value!.content; track child) {
+    @if (block()) {
+      <an-block [level]="level()" [block]="block()!">
+        @for (child of block()!.content; track child) {
           <an-notion-block [blockId]="child" [level]="level() + 1" />
         }
       </an-block>
@@ -23,7 +24,7 @@ import { NotionContextService } from '../context.service';
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,15 +37,9 @@ export class NotionBlockComponent {
     const recordMap = this.contextService.recordMap();
     if (recordMap) {
       const id = this.blockId() || Object.keys(recordMap.block)[0];
-      return {
-        id: id,
-        value: recordMap.block[id]?.value,
-      };
+      return recordMap.block[id]?.value;
     } else {
-      return {
-        id: undefined,
-        value: undefined,
-      };
+      return undefined;
     }
   });
 }

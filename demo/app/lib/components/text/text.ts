@@ -7,10 +7,10 @@ import {
   input,
 } from '@angular/core';
 import { Block, Decoration } from 'notion-types';
-import { NotionContextService } from '../context.service';
+import { NotionContextService } from '../../context.service';
 import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { SubDecoration } from 'notion-types/build/core';
-import { AnTextClassicComponent } from './text/text-classic';
+import { AnTextClassicComponent } from './text-classic';
 
 @Component({
   selector: 'an-text',
@@ -26,7 +26,7 @@ import { AnTextClassicComponent } from './text/text-classic';
         @if (item[0] === ',') {
           <span [ngStyle]="{ padding: '0.5em' }"></span>
         } @else {
-          {{ item[0] }}
+          <span>{{ item[0] }}</span>
         }
       } @else {
         <an-text-classic
@@ -36,14 +36,14 @@ import { AnTextClassicComponent } from './text/text-classic';
           [block]="block()"
           [decorations]="decorations() ? (decorations()![index] ?? []) : []"
         >
-          {{ item[0] }}
+          <span>{{ item[0] }}</span>
         </an-text-classic>
       }
     }
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -11,7 +11,7 @@ import { NotionContextService } from '../context.service';
 import { getBlockTitle } from 'notion-utils';
 import { NgClass } from '@angular/common';
 import { AnPageIconComponent } from './page-icon.component';
-import { AnTextComponent } from './text.component';
+import { AnTextComponent } from './text/text';
 
 @Component({
   selector: 'an-page-title',
@@ -26,17 +26,14 @@ import { AnTextComponent } from './text.component';
           className="notion-page-title-icon"
         />
         <span class="notion-page-title-text">
-          <an-text
-            [value]="params()!.titleDecoration ?? []"
-            [block]="block()"
-          />
+          <an-text [value]="params() ?? []" [block]="block()" />
         </span>
       </span>
     }
   `,
   styles: `
     :host {
-      display: block;
+      display: contents;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,7 +44,7 @@ export class AnPageTitleComponent {
   readonly className = input<string>('');
   readonly defaultIcon = input<undefined | string>(undefined);
 
-  params = computed<null | { titleDecoration?: Decoration[] }>(() => {
+  params = computed<null | Decoration[]>(() => {
     const block = this.block();
     const recordMap = this.ctx.recordMap();
     if (!block || !recordMap) return null;
@@ -62,10 +59,7 @@ export class AnPageTitleComponent {
       }
 
       const titleDecoration: Decoration[] = [[title]];
-
-      return {
-        titleDecoration,
-      };
+      return titleDecoration;
     }
 
     if (!block.properties?.title) {

@@ -1,49 +1,37 @@
 import { Component, computed, forwardRef, inject, input } from '@angular/core';
-import { NgComponentOutlet } from '@angular/common';
+import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { AnGracefulImageComponent } from '../graceful-image.component';
 import { AnPageTitleComponent } from '../page-title.component';
 import { NotionContextService } from '../../context.service';
 import { LinkFormat, SubDecoration } from 'notion-types/build/core';
 import { parsePageId } from 'notion-utils';
 import { getHashFragmentValue } from '../../utils';
+import { AnPageLinkComponent } from '../link/page-link.component';
 
 @Component({
   selector: 'an-text-a',
   template: `
-    @if (params().isRootDomain) {
-      <ng-container
-        *ngComponentOutlet="
-          ctx.components()?.PageLink ?? null;
-          inputs: {
-            className: 'notion-link',
-            href: params().href,
-            linkProps: linkProps(),
-          }
-        "
-      >
-        <ng-content /> </ng-container
-      >,
-    } @else {
-      <ng-container
-        *ngComponentOutlet="
-          ctx.components()?.Link ?? null;
-          inputs: {
-            className: 'notion-link',
-            href: params().href,
-            linkProps: linkProps(),
-          }
-        "
-      >
-        <ng-content /> </ng-container
-      >,
-    }
+    <an-page-link
+      [component]="ctx.components().PageLink"
+      [href]="params().href"
+      [className]="'notion-link'"
+    >
+      <ng-content />
+    </an-page-link>
   `,
   standalone: true,
   imports: [
     NgComponentOutlet,
     AnGracefulImageComponent,
     forwardRef(() => AnPageTitleComponent),
+    NgTemplateOutlet,
+    AnPageLinkComponent,
   ],
+  styles: `
+    :host {
+      display: contents;
+    }
+  `,
 })
 export class AnTextAComponent {
   readonly ctx = inject(NotionContextService);
