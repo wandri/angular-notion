@@ -102,39 +102,6 @@
           }
         }
       }
-    },
-    "angular-notion-x": {
-      "projectType": "library",
-      "root": "projects/angular-notion-x",
-      "sourceRoot": "projects/angular-notion-x/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/angular-notion-x/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/angular-notion-x/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/angular-notion-x/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/angular-notion-x/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
-        }
-      }
     }
   }
 }

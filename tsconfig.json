@@ -3,11 +3,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "paths": {
-      "angular-notion-x": [
-        "./dist/angular-notion-x"
-      ]
-    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
