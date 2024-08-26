@@ -13,13 +13,14 @@ import { NgClass, NgOptimizedImage } from '@angular/common';
   imports: [NgClass, NgOptimizedImage],
   template: `
     @if (src()) {
-      <img
-        [ngSrc]="src()!"
-        fill
-        [alt]="alt()"
-        [ngClass]="className()"
-        [style.object-fit]="'cover'"
-      />
+      <div [ngClass]="className()">
+        <img
+          [src]="src()!"
+          [alt]="alt()"
+          [ngClass]="className()"
+          loading="lazy"
+        />
+      </div>
     }
   `,
   styles: `

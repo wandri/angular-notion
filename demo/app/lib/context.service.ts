@@ -51,7 +51,7 @@ export class NotionContextService {
   readonly showCollectionViewDropdown = signal<boolean | undefined>(
     defaultNotionContext.showCollectionViewDropdown,
   );
-  readonly linkTableTitleProperties = signal<boolean | undefined>(
+  readonly linkTableTitleProperties = signal<boolean>(
     defaultNotionContext.linkTableTitleProperties,
   );
   readonly isLinkCollectionToUrlProperty = signal<boolean | undefined>(

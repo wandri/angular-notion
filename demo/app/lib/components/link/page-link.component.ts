@@ -8,14 +8,14 @@ import {
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { AngularComponent } from '../../type';
 
 @Component({
   selector: 'an-page-link',
   host: { ngSkipHydration: 'true' },
   standalone: true,
-  imports: [NgTemplateOutlet, NgComponentOutlet],
+  imports: [NgTemplateOutlet, NgComponentOutlet, NgClass],
   template: ` @if (component()) {
       <ng-container
         *ngComponentOutlet="
@@ -29,7 +29,7 @@ import { AngularComponent } from '../../type';
       />
     } @else {
       <a
-        [className]="className()"
+        [ngClass]="className()"
         [href]="href() ?? null"
         [attr.type]="type() ?? null"
         [attr.target]="target() ?? null"

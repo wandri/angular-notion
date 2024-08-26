@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'an-file-icon',
+  selector: 'an-svg-collection-view-board-icon',
   standalone: true,
   imports: [NgClass],
   template: `
-    <svg [ngClass]="className()" viewBox="0 0 30 30">
+    <svg viewBox="0 0 14 14" [ngClass]="className()">
       <path
-        d="M22,8v12c0,3.866-3.134,7-7,7s-7-3.134-7-7V8c0-2.762,2.238-5,5-5s5,2.238,5,5v12c0,1.657-1.343,3-3,3s-3-1.343-3-3V8h-2v12c0,2.762,2.238,5,5,5s5-2.238,5-5V8c0-3.866-3.134-7-7-7S6,4.134,6,8v12c0,4.971,4.029,9,9,9s9-4.029,9-9V8H22z"
-      ></path>
+        d="M12 1.5H2a.5.5 0 00-.5.5v10a.5.5 0 00.5.5h10a.5.5 0 00.5-.5V2a.5.5 0 00-.5-.5zM2 0h10a2 2 0 012 2v10a2 2 0 01-2 2H2a2 2 0 01-2-2V2a2 2 0 012-2zm1 3h2v6H3V3zm3 0h2v8H6V3zm3 0h2v4H9V3z"
+      />
     </svg>
   `,
   styles: `
@@ -19,6 +19,6 @@ import { NgClass } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnSvgFileComponent {
+export class AnSvgCollectionViewBoardIconComponent {
   readonly className = input<string>('');
 }

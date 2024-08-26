@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'an-file-icon',
+  selector: 'an-svg-select-icon',
   standalone: true,
   imports: [NgClass],
   template: `
-    <svg [ngClass]="className()" viewBox="0 0 30 30">
+    <svg viewBox="0 0 14 14" [ngClass]="className()">
       <path
-        d="M22,8v12c0,3.866-3.134,7-7,7s-7-3.134-7-7V8c0-2.762,2.238-5,5-5s5,2.238,5,5v12c0,1.657-1.343,3-3,3s-3-1.343-3-3V8h-2v12c0,2.762,2.238,5,5,5s5-2.238,5-5V8c0-3.866-3.134-7-7-7S6,4.134,6,8v12c0,4.971,4.029,9,9,9s9-4.029,9-9V8H22z"
-      ></path>
+        d="M7 13A6 6 0 107 1a6 6 0 000 12zM3.751 5.323A.2.2 0 013.909 5h6.182a.2.2 0 01.158.323L7.158 9.297a.2.2 0 01-.316 0L3.751 5.323z"
+      />
     </svg>
   `,
   styles: `
@@ -19,6 +19,6 @@ import { NgClass } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnSvgFileComponent {
+export class AnSvgSelectComponent {
   readonly className = input<string>('');
 }

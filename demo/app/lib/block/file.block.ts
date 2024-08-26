@@ -10,12 +10,12 @@ import { NotionContextService } from '../context.service';
 import { NgClass } from '@angular/common';
 import { AnLinkComponent } from '../components/link/link.component';
 import { AnTextComponent } from '../components/text/text';
-import { AnFileIconComponent } from '../icons/file-icon';
+import { AnSvgFileComponent } from '../icons/file-icon';
 
 @Component({
   selector: 'an-file-block',
   standalone: true,
-  imports: [NgClass, AnLinkComponent, AnTextComponent, AnFileIconComponent],
+  imports: [NgClass, AnLinkComponent, AnTextComponent, AnSvgFileComponent],
   template: `
     <div [ngClass]="['notion-file', className()].join(' ')">
       <an-link

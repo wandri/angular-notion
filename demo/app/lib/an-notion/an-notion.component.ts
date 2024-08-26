@@ -192,7 +192,7 @@ export class AnNotionComponent {
     effect(
       () => {
         this.contextService.linkTableTitleProperties.set(
-          this.linkTableTitleProperties(),
+          !!this.linkTableTitleProperties(),
         );
       },
       { allowSignalWrites: true },

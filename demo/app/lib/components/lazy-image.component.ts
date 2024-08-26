@@ -64,8 +64,6 @@ export class AnLazyImageComponent {
   readonly style = input<Record<string, string> | null | undefined>(undefined);
   readonly height = input<number | string | undefined>(undefined);
   readonly priority = input<boolean>(false);
-  private contextService = inject(NotionContextService);
-  readonly ctx = this.contextService;
   readonly previewImage = computed<{
     preview: PreviewImage | null | undefined;
     inputs: Record<string, unknown>;
@@ -92,6 +90,8 @@ export class AnLazyImageComponent {
       },
     };
   });
+  private contextService = inject(NotionContextService);
+  readonly ctx = this.contextService;
 
   onLoad() {}
 }

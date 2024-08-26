@@ -56,8 +56,6 @@ export class AnContentTableBlockComponent {
   readonly ctx = inject(NotionContextService);
   readonly block = input.required<Block>();
   readonly blockId = input.required<string>();
-  protected readonly uuidToId = uuidToId;
-
   readonly params = computed<null | {
     page: Block | null;
     toc: Array<TableOfContentsEntry>;
@@ -75,4 +73,5 @@ export class AnContentTableBlockComponent {
       blockColor,
     };
   });
+  protected readonly uuidToId = uuidToId;
 }

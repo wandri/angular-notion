@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   forwardRef,
   inject,
   input,
@@ -192,7 +191,7 @@ import { AnGoogleDriveBlockComponent } from './block/google-drive.block';
         <ng-container
           *ngComponentOutlet="
             ctx.components()?.Collection ?? null;
-            inputs: { block: block(), className: blockId(), ctx: ctx }
+            inputs: { block: block(), className: blockId() }
           "
         />
       } @else if (this.block().type === 'callout') {

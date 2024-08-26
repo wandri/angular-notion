@@ -136,7 +136,7 @@ import { AnPageLinkComponent } from '../components/link/page-link.component';
                   <ng-container
                     *ngComponentOutlet="
                       ctx.components()?.Collection ?? null;
-                      inputs: { block: block(), ctx: ctx }
+                      inputs: { block: block() }
                     "
                   />
                 }
@@ -205,7 +205,7 @@ import { AnPageLinkComponent } from '../components/link/page-link.component';
             <ng-container
               *ngComponentOutlet="
                 ctx.components()?.Collection ?? null;
-                inputs: { block: block(), ctx: ctx }
+                inputs: { block: block() }
               "
             />
           }

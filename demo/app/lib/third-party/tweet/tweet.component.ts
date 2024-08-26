@@ -9,7 +9,7 @@ import {
   PLATFORM_ID,
   viewChild,
 } from '@angular/core';
-import { AnTwitterService, TweetOption } from './tweet.service';
+import { AnTwitterService } from './tweet.service';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({

@@ -12,6 +12,7 @@ import { NotionClientService } from './lib/notion-client.service';
 import { getPageTitle } from 'notion-utils';
 import { AnPdfComponent } from './lib/third-party/pdf.component';
 import { AnTweetComponent } from './lib/third-party/tweet/tweet.component';
+import { AnCollectionComponent } from './lib/third-party/collection/collection.component';
 
 @Component({
   selector: 'an-page-demo',
@@ -24,7 +25,11 @@ import { AnTweetComponent } from './lib/third-party/tweet/tweet.component';
         [fullPage]="true"
         [darkMode]="false"
         [rootPageId]="pageId() ?? defaultId"
-        [components]="{ Pdf: AnPdfComponent, Tweet: AnTweetComponent }"
+        [components]="{
+          Pdf: AnPdfComponent,
+          Tweet: AnTweetComponent,
+          Collection: AnCollectionComponent,
+        }"
       />
     }
   `,
@@ -42,6 +47,7 @@ export class PageComponent {
   readonly defaultId = '067dd719a912471ea9a3ac10710e7fdf';
   protected readonly AnPdfComponent = AnPdfComponent;
   protected readonly AnTweetComponent = AnTweetComponent;
+  protected readonly AnCollectionComponent = AnCollectionComponent;
   private notionClient = inject(NotionClientService);
 
   constructor() {
