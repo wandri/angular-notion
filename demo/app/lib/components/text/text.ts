@@ -8,18 +8,13 @@ import {
 } from '@angular/core';
 import { Block, Decoration } from 'notion-types';
 import { NotionContextService } from '../../context.service';
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { SubDecoration } from 'notion-types/build/core';
 import { AnTextClassicComponent } from './text-classic';
 
 @Component({
   selector: 'an-text',
-  standalone: true,
-  imports: [
-    NgStyle,
-    NgTemplateOutlet,
-    forwardRef(() => AnTextClassicComponent),
-  ],
+  imports: [NgStyle, forwardRef(() => AnTextClassicComponent)],
   template: `
     @for (item of value(); track index; let index = $index) {
       @if (!item[1]) {

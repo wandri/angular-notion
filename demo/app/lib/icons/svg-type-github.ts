@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'an-svg-type-github',
-  standalone: true,
   imports: [],
   template: `
     <svg viewBox="0 0 260 260">

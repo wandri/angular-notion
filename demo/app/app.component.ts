@@ -1,13 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ExtendedRecordMap } from 'notion-types';
-import { AnNotionComponent } from './lib/an-notion/an-notion.component';
 import { NotionClientService } from './lib/notion-client.service';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, AnNotionComponent],
+  imports: [RouterOutlet],
   template: '<router-outlet />',
   styles: '',
 })

@@ -4,7 +4,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { NgClass, NgComponentOutlet } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { PropertyType } from 'notion-types';
 import { AngularComponent } from '../type';
 import { AnSvgTitleComponent } from './title-icon';
@@ -49,8 +49,7 @@ const iconMap = {
 
 @Component({
   selector: 'an-property-icon',
-  standalone: true,
-  imports: [NgClass, NgComponentOutlet],
+  imports: [NgComponentOutlet],
   template: ` <ng-container
     *ngComponentOutlet="icon(); inputs: { className: className() }"
   />`,

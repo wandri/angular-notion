@@ -13,7 +13,6 @@ import { getPageBreadcrumbs } from 'notion-utils';
 
 @Component({
   selector: 'an-breadcrumbs',
-  standalone: true,
   imports: [AnPageLinkComponent, AnPageIconComponent],
   template: ` <div class="breadcrumbs">
     @for (breadcrumb of breadcrumbs(); track breadcrumb; let index = $index) {

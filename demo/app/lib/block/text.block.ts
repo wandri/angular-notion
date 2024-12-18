@@ -7,13 +7,12 @@ import {
 } from '@angular/core';
 import { NotionContextService } from '../context.service';
 import { Block } from 'notion-types';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { AnTextComponent } from '../components/text/text';
 
 @Component({
   selector: 'an-text-block',
-  standalone: true,
-  imports: [NgTemplateOutlet, NgClass, AnTextComponent],
+  imports: [NgClass, AnTextComponent],
   template: `
     @if (!block().properties && !block().content?.length) {
       <div [ngClass]="['notion-blank', blockId()]">&nbsp;</div>

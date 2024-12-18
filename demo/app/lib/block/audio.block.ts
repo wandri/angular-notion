@@ -11,7 +11,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'an-audio-block',
-  standalone: true,
   imports: [NgClass],
   template: `
     <div [ngClass]="['notion-audio', className()].join(' ')">

@@ -3,7 +3,6 @@ import { AnSvgCheckComponent } from '../icons/check-icon';
 
 @Component({
   selector: 'an-checkbox',
-  standalone: true,
   imports: [AnSvgCheckComponent],
   template: ` <span class="notion-property notion-property-checkbox">
     @if (isChecked()) {

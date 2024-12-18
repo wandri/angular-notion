@@ -14,7 +14,6 @@ import { AngularComponent } from '../../type';
 @Component({
   selector: 'an-page-link',
   host: { ngSkipHydration: 'true' },
-  standalone: true,
   imports: [NgTemplateOutlet, NgComponentOutlet, NgClass],
   template: ` @if (component()) {
       <ng-container

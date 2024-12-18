@@ -52,7 +52,6 @@ type Style = Record<string, string | number> & {
 
 @Component({
   selector: 'an-asset',
-  standalone: true,
   imports: [
     NgStyle,
     NgTemplateOutlet,

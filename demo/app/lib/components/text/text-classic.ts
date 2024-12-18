@@ -114,7 +114,6 @@ import { AnTextAComponent } from './text-a';
       <ng-content />
     </ng-template>
   `,
-  standalone: true,
   imports: [
     NgClass,
     NgComponentOutlet,

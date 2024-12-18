@@ -5,7 +5,6 @@ import { NgClass, NgComponentOutlet, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'an-page-aside',
-  standalone: true,
   imports: [NgClass, NgComponentOutlet, NgStyle],
   template: ` @if (hasAside()) {
     <aside [ngClass]="['notion-aside', className()]">

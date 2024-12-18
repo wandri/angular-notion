@@ -24,7 +24,6 @@ const isIconBlock = (value: Block): value is PageBlock | CalloutBlock => {
 
 @Component({
   selector: 'an-page-icon',
-  standalone: true,
   imports: [NgClass, AnLazyImageComponent, AnDefaultPageIconComponent],
   template: `
     <div
@@ -76,42 +75,39 @@ export class AnPageIconComponent {
   private notionService = inject(NotionContextService);
 
   constructor() {
-    effect(
-      () => {
-        const recordMap = this.notionService.recordMap();
-        const block = this.block();
-        const icon = this.icon();
-        const defaultIcon = this.defaultIcon();
-        const hideDefaultIcon = this.hideDefaultIcon();
-        const darkMode = this.notionService.darkMode();
-        const mapImageUrlFn = this.notionService.mapImageUrl();
-        if (isIconBlock(block) && recordMap && mapImageUrlFn) {
-          this.icon.set(getBlockIcon(block, recordMap)?.trim() || defaultIcon);
-          const title = getBlockTitle(block, recordMap);
-          if (icon && isUrl(icon)) {
-            const url = mapImageUrlFn(icon, block);
-            this.type.set('image');
-            this.src.set(url ?? '');
-            this.alt.set(title || 'page icon');
-          } else if (icon && icon?.startsWith('/icons/')) {
-            const url =
-              'https://www.notion.so' +
-              icon +
-              '?mode=' +
-              (darkMode ? 'dark' : 'light');
-            this.type.set('image');
-            this.src.set(url);
-            this.alt.set(title || 'page icon');
-          } else if (!icon) {
-            if (!hideDefaultIcon) {
-              this.type.set('defaultIcon');
-            }
-          } else {
-            this.type.set('icon');
+    effect(() => {
+      const recordMap = this.notionService.recordMap();
+      const block = this.block();
+      const icon = this.icon();
+      const defaultIcon = this.defaultIcon();
+      const hideDefaultIcon = this.hideDefaultIcon();
+      const darkMode = this.notionService.darkMode();
+      const mapImageUrlFn = this.notionService.mapImageUrl();
+      if (isIconBlock(block) && recordMap && mapImageUrlFn) {
+        this.icon.set(getBlockIcon(block, recordMap)?.trim() || defaultIcon);
+        const title = getBlockTitle(block, recordMap);
+        if (icon && isUrl(icon)) {
+          const url = mapImageUrlFn(icon, block);
+          this.type.set('image');
+          this.src.set(url ?? '');
+          this.alt.set(title || 'page icon');
+        } else if (icon && icon?.startsWith('/icons/')) {
+          const url =
+            'https://www.notion.so' +
+            icon +
+            '?mode=' +
+            (darkMode ? 'dark' : 'light');
+          this.type.set('image');
+          this.src.set(url);
+          this.alt.set(title || 'page icon');
+        } else if (!icon) {
+          if (!hideDefaultIcon) {
+            this.type.set('defaultIcon');
           }
+        } else {
+          this.type.set('icon');
         }
-      },
-      { allowSignalWrites: true },
-    );
+      }
+    });
   }
 }

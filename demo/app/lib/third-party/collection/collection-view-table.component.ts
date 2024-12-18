@@ -13,7 +13,6 @@ const defaultBlockIds: string[] = [];
 
 @Component({
   selector: 'an-collection-view-table',
-  standalone: true,
   imports: [AnCollectionTableComponent, AnCollectionGroupComponent],
   template: `
     @if (params()) {

@@ -14,7 +14,6 @@ import { AngularComponent } from '../../type';
 @Component({
   selector: 'an-link',
   host: { ngSkipHydration: 'true' },
-  standalone: true,
   imports: [NgComponentOutlet, NgTemplateOutlet, NgClass],
   template: `
     @if (component()) {

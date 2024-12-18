@@ -6,20 +6,13 @@ import {
 } from '@angular/core';
 import { NotionContextService } from '../context.service';
 import { Block } from 'notion-types';
-import { NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgComponentOutlet } from '@angular/common';
 import { AnPageIconComponent } from '../components/page-icon.component';
 import { AnTextComponent } from '../components/text/text';
 
 @Component({
   selector: 'an-callout-block',
-  standalone: true,
-  imports: [
-    AnPageIconComponent,
-    AnTextComponent,
-    NgComponentOutlet,
-    NgTemplateOutlet,
-    NgClass,
-  ],
+  imports: [AnPageIconComponent, AnTextComponent, NgComponentOutlet, NgClass],
   template: `
     @if (ctx.components().Callout) {
       <ng-container

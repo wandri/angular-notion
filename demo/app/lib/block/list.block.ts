@@ -13,8 +13,7 @@ import { AnTextComponent } from '../components/text/text';
 
 @Component({
   selector: 'an-wrap-list',
-  standalone: true,
-  imports: [NgTemplateOutlet, AnTextComponent, NgClass],
+  imports: [NgTemplateOutlet, NgClass],
   template: `
     @if (block().type === 'bulleted_list') {
       <ul [ngClass]="['notion-list', 'notion-list-disc', blockId() ?? '']">
@@ -47,8 +46,7 @@ export class AnWrapListComponent {
 
 @Component({
   selector: 'an-list-block',
-  standalone: true,
-  imports: [NgTemplateOutlet, AnTextComponent, NgClass, AnWrapListComponent],
+  imports: [NgTemplateOutlet, AnTextComponent, AnWrapListComponent],
   template: `
     @if (params()) {
       @if (params()!.isTopLevel) {

@@ -2,20 +2,15 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Collection, CollectionView } from 'notion-types';
 import { AnCollectionViewTableComponent } from './collection-view-table.component';
 import { AnCollectionViewListComponent } from './collection-view-list.component';
-import {
-  AnCollectionBoardComponent,
-  AnCollectionViewBoardComponent,
-} from './collection-view-board.component';
+import { AnCollectionViewBoardComponent } from './collection-view-board.component';
 import { AnCollectionViewGalleryComponent } from './collection-view-gallery.component';
 
 @Component({
   selector: 'an-collection-view',
-  standalone: true,
   imports: [
     AnCollectionViewTableComponent,
     AnCollectionViewGalleryComponent,
     AnCollectionViewListComponent,
-    AnCollectionBoardComponent,
     AnCollectionViewBoardComponent,
   ],
   template: `

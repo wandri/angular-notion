@@ -14,7 +14,6 @@ import { AnSvgFileComponent } from '../icons/file-icon';
 
 @Component({
   selector: 'an-file-block',
-  standalone: true,
   imports: [NgClass, AnLinkComponent, AnTextComponent, AnSvgFileComponent],
   template: `
     <div [ngClass]="['notion-file', className()].join(' ')">

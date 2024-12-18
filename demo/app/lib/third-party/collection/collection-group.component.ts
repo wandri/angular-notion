@@ -5,7 +5,6 @@ import { AnPropertyComponent } from './property/property.component';
 
 @Component({
   selector: 'an-collection-group',
-  standalone: true,
   imports: [NgStyle, NgClass, AnPropertyComponent],
   template: `
     @if (!hidden()) {

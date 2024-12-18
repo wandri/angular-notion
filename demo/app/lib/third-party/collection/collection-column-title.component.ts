@@ -4,7 +4,6 @@ import { AnPropertyIconComponent } from '../../icons/property-icon';
 
 @Component({
   selector: 'an-collection-column-title',
-  standalone: true,
   imports: [AnPropertyIconComponent],
   template: `
     <div class="notion-collection-column-title">

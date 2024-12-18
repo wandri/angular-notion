@@ -36,7 +36,6 @@ type Content = {
 
 @Component({
   selector: 'an-collection-card',
-  standalone: true,
   imports: [
     AnLazyImageComponent,
     NgStyle,

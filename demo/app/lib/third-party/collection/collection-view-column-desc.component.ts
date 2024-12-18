@@ -10,7 +10,6 @@ import { AnPropertyIconComponent } from '../../icons/collection-view-icon';
 
 @Component({
   selector: 'an-collection-view-column-desc',
-  standalone: true,
   imports: [NgClass, AnPropertyIconComponent],
   template: `
     @if (params()) {

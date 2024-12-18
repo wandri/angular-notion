@@ -21,7 +21,6 @@ import { AnLinkIconComponent } from '../icons/link-icon';
 
 @Component({
   selector: 'an-header-block',
-  standalone: true,
   imports: [NgTemplateOutlet, NgClass, AnTextComponent, AnLinkIconComponent],
   template: `
     @if (block().properties) {
@@ -114,28 +113,25 @@ export class AnHeaderBlockComponent {
   private ctx = inject(NotionContextService);
 
   constructor() {
-    effect(
-      () => {
-        const block = this.block();
-        const recordMap = this.ctx.recordMap();
-        let indentLevel = this.ctx.tocIndentLevelCache[block.id];
-        if (indentLevel === undefined && recordMap) {
-          const page = getBlockParentPage(block, recordMap);
+    effect(() => {
+      const block = this.block();
+      const recordMap = this.ctx.recordMap();
+      let indentLevel = this.ctx.tocIndentLevelCache[block.id];
+      if (indentLevel === undefined && recordMap) {
+        const page = getBlockParentPage(block, recordMap);
 
-          if (page) {
-            const toc = getPageTableOfContents(page, recordMap);
-            const tocItem = toc.find((tocItem) => tocItem.id === block.id);
-            if (tocItem) {
-              indentLevel = tocItem.indentLevel;
-              this.ctx.tocIndentLevelCache[block.id] = indentLevel;
-            }
+        if (page) {
+          const toc = getPageTableOfContents(page, recordMap);
+          const tocItem = toc.find((tocItem) => tocItem.id === block.id);
+          if (tocItem) {
+            indentLevel = tocItem.indentLevel;
+            this.ctx.tocIndentLevelCache[block.id] = indentLevel;
           }
         }
-        if (indentLevel !== undefined) {
-          this.indentLevelClass.set(`notion-h-indent-${indentLevel}`);
-        }
-      },
-      { allowSignalWrites: true },
-    );
+      }
+      if (indentLevel !== undefined) {
+        this.indentLevelClass.set(`notion-h-indent-${indentLevel}`);
+      }
+    });
   }
 }

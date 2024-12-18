@@ -20,7 +20,6 @@ export const qs = (params: Record<string, string>) => {
 
 @Component({
   selector: 'an-youTube-lite-embed',
-  standalone: true,
   imports: [NgClass, NgStyle],
   template: `
     @if (parameters()) {
@@ -123,12 +122,9 @@ export class AnYoutubeLiteEmbedComponent {
   });
 
   constructor() {
-    effect(
-      () => {
-        this.iframeInitialized.set(this.defaultPlay());
-      },
-      { allowSignalWrites: true },
-    );
+    effect(() => {
+      this.iframeInitialized.set(this.defaultPlay());
+    });
   }
 
   warmConnections() {

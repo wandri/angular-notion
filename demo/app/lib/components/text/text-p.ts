@@ -1,5 +1,4 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { NgComponentOutlet } from '@angular/common';
 import { AnPageTitleComponent } from '../page-title.component';
 import { NotionContextService } from '../../context.service';
 import { PageFormat, SubDecoration } from 'notion-types/build/core';
@@ -19,13 +18,12 @@ import { AnPageLinkComponent } from '../link/page-link.component';
       }
     </an-page-link>
   `,
-  standalone: true,
   styles: `
     :host {
       display: contents;
     }
   `,
-  imports: [NgComponentOutlet, AnPageTitleComponent, AnPageLinkComponent],
+  imports: [AnPageTitleComponent, AnPageLinkComponent],
 })
 export class AnTextPComponent {
   readonly ctx = inject(NotionContextService);

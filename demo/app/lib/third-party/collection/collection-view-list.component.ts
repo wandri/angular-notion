@@ -6,7 +6,6 @@ import {
   input,
 } from '@angular/core';
 import { Block, Collection, CollectionView } from 'notion-types';
-import { NgClass, NgStyle } from '@angular/common';
 import { NotionContextService } from '../../context.service';
 import { getCollectionGroups } from './collection.utils';
 import { AnCollectionGroupComponent } from './collection-group.component';
@@ -15,7 +14,6 @@ import { AnPropertyComponent } from './property/property.component';
 
 @Component({
   selector: 'an-collection-list',
-  standalone: true,
   imports: [AnPageLinkComponent, AnPropertyComponent],
   template: `
     <div class="notion-list-collection">
@@ -91,13 +89,7 @@ const defaultBlockIds: string[] = [];
 
 @Component({
   selector: 'an-collection-view-list',
-  standalone: true,
-  imports: [
-    NgStyle,
-    NgClass,
-    AnCollectionGroupComponent,
-    AnCollectionListComponent,
-  ],
+  imports: [AnCollectionGroupComponent, AnCollectionListComponent],
   template: `
     @if (params().collectionGroups) {
       @for (group of params().collectionGroups ?? []; track group) {

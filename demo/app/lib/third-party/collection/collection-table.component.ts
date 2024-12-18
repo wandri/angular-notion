@@ -18,7 +18,6 @@ import { AnCollectionColumnTitleComponent } from './collection-column-title.comp
 
 @Component({
   selector: 'an-collection-table',
-  standalone: true,
   imports: [
     NgStyle,
     NgClass,

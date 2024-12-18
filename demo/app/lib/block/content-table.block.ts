@@ -17,7 +17,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'an-content-table-block',
-  standalone: true,
   imports: [NgClass],
   template: `
     @if (params() && params()?.page) {

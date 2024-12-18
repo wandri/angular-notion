@@ -8,21 +8,13 @@ import {
 } from '@angular/core';
 import { Block } from 'notion-types';
 import { NotionContextService } from '../context.service';
-import { AnPageLinkComponent } from './link/page-link.component';
-import { AnPageIconComponent } from './page-icon.component';
 import { AngularComponent, SearchNotionFn } from '../type';
 import { NgClass } from '@angular/common';
 import { AnLinkIconComponent } from '../icons/search-icon';
 
 @Component({
   selector: 'an-search',
-  standalone: true,
-  imports: [
-    AnPageLinkComponent,
-    AnPageIconComponent,
-    NgClass,
-    AnLinkIconComponent,
-  ],
+  imports: [NgClass, AnLinkIconComponent],
   template: `
     @if (hasSearch()) {
       <div

@@ -3,7 +3,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'an-file-icon',
-  standalone: true,
   imports: [NgClass],
   template: `
     <svg [ngClass]="className()" viewBox="0 0 30 30">

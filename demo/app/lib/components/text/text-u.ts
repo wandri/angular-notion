@@ -1,5 +1,4 @@
 import { Component, computed, forwardRef, inject, input } from '@angular/core';
-import { NgComponentOutlet } from '@angular/common';
 import { AnGracefulImageComponent } from '../graceful-image.component';
 import { AnPageTitleComponent } from '../page-title.component';
 import { NotionContextService } from '../../context.service';
@@ -17,12 +16,7 @@ import { SubDecoration, UserFormat } from 'notion-types/build/core';
       />
     }
   `,
-  standalone: true,
-  imports: [
-    NgComponentOutlet,
-    AnGracefulImageComponent,
-    forwardRef(() => AnPageTitleComponent),
-  ],
+  imports: [AnGracefulImageComponent],
   styles: `
     :host {
       display: contents;

@@ -15,7 +15,6 @@ import { getTextContent } from 'notion-utils';
 
 @Component({
   selector: 'an-bookmark-block',
-  standalone: true,
   imports: [AnLinkComponent, NgClass, AnTextComponent, AnLazyImageComponent],
   template: `
     @if (params()) {

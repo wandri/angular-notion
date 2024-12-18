@@ -5,12 +5,11 @@ import {
   input,
   PLATFORM_ID,
 } from '@angular/core';
-import { isPlatformBrowser, NgClass, NgStyle } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'an-pdf',
-  standalone: true,
-  imports: [NgStyle, NgClass],
+  imports: [],
   template: `
     @if (file() && isBrowser) {
       <!--      <pdf-viewer-->

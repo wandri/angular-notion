@@ -15,7 +15,6 @@ import { AnTextComponent } from './text/text';
 
 @Component({
   selector: 'an-page-title',
-  standalone: true,
   imports: [NgClass, AnPageIconComponent, forwardRef(() => AnTextComponent)],
   template: `
     @if (params()) {

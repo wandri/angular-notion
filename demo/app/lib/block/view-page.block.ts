@@ -27,7 +27,6 @@ import { AnPageLinkComponent } from '../components/link/page-link.component';
 
 @Component({
   selector: 'an-view-page-block',
-  standalone: true,
   imports: [
     NgClass,
     AnLazyImageComponent,

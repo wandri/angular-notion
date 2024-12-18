@@ -11,7 +11,6 @@ import { NotionContextService } from '../context.service';
 
 @Component({
   selector: 'an-notion-block',
-  standalone: true,
   imports: [forwardRef(() => BlockComponent)],
   template: `
     @if (block()) {

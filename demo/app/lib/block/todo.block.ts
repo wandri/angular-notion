@@ -12,7 +12,6 @@ import { AnCheckboxComponent } from '../components/checkbox.component';
 
 @Component({
   selector: 'an-todo-block',
-  standalone: true,
   imports: [AnCheckboxComponent, NgClass, AnTextComponent],
   template: `
     <div [ngClass]="['notion-to-do', blockId()]">

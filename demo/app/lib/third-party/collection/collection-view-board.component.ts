@@ -16,7 +16,6 @@ import { AnCollectionCardComponent } from './collection-card.component';
 
 @Component({
   selector: 'an-collection-board',
-  standalone: true,
   imports: [
     NgClass,
     NgStyle,
@@ -188,7 +187,6 @@ const defaultBlockIds: string[] = [];
 
 @Component({
   selector: 'an-collection-view-board',
-  standalone: true,
   imports: [AnCollectionGroupComponent, AnCollectionBoardComponent],
   template: `
     @if (params().collectionGroups) {

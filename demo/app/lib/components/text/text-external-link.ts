@@ -1,5 +1,4 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { NgComponentOutlet } from '@angular/common';
 import { AnPageTitleComponent } from '../page-title.component';
 import { AnGracefulImageComponent } from '../graceful-image.component';
 import { NotionContextService } from '../../context.service';
@@ -34,9 +33,7 @@ import { AnPageLinkComponent } from '../link/page-link.component';
       </an-page-link>
     }
   `,
-  standalone: true,
   imports: [
-    NgComponentOutlet,
     AnPageTitleComponent,
     AnGracefulImageComponent,
     AnPageLinkComponent,

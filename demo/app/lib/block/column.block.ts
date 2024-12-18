@@ -7,12 +7,11 @@ import {
 } from '@angular/core';
 import { NotionContextService } from '../context.service';
 import { Block } from 'notion-types';
-import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'an-column-block',
-  standalone: true,
-  imports: [NgTemplateOutlet, NgStyle, NgClass],
+  imports: [NgStyle, NgClass],
   template: `
     <div [ngClass]="['notion-column', blockId()]" [ngStyle]="style()">
       <ng-content />

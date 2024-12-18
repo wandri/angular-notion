@@ -3,7 +3,6 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'an-search-icon',
-  standalone: true,
   imports: [NgClass],
   template: `
     <svg [ngClass]="['notion-icon', className()]" viewBox="0 0 17 17">

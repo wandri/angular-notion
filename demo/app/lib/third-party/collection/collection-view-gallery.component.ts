@@ -14,7 +14,6 @@ import { AnCollectionCardComponent } from './collection-card.component';
 
 @Component({
   selector: 'an-collection-gallery',
-  standalone: true,
   imports: [NgClass, AnCollectionCardComponent],
   template: `
     @if (params()) {
@@ -79,13 +78,7 @@ const defaultBlockIds: string[] = [];
 
 @Component({
   selector: 'an-collection-view-gallery',
-  standalone: true,
-  imports: [
-    AnCollectionGroupComponent,
-    NgClass,
-    AnCollectionCardComponent,
-    AnCollectionGalleryComponent,
-  ],
+  imports: [AnCollectionGroupComponent, AnCollectionGalleryComponent],
   template: `
     @if (params()) {
       @if (params()!.isGroupedCollection) {

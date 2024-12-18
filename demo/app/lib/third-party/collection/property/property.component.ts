@@ -16,7 +16,6 @@ import { AnDefaultPropertyComponent } from './default-property.component';
 
 @Component({
   selector: 'an-property',
-  standalone: true,
   imports: [NgComponentOutlet, AnDefaultPropertyComponent],
   template: `
     @if (ctx.components().Property) {

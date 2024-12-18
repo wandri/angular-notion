@@ -11,7 +11,6 @@ import { AnCollectionViewColumnDescComponent } from './collection-view-column-de
 
 @Component({
   selector: 'an-collection-view-tab',
-  standalone: true,
   imports: [NgClass, AnCollectionViewColumnDescComponent],
   template: `
     <div class="notion-collection-view-tabs-row">

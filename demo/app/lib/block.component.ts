@@ -11,28 +11,17 @@ import { NotionContextService } from './context.service';
 import { Block } from 'notion-types';
 import { AngularComponent } from './type';
 import { uuidToId } from 'notion-utils';
-import {
-  NgClass,
-  NgComponentOutlet,
-  NgStyle,
-  NgTemplateOutlet,
-} from '@angular/common';
-import { AnLazyImageComponent } from './components/lazy-image.component';
-import { AnPageAsideComponent } from './components/page-aside.component';
-import { AnPageIconComponent } from './components/page-icon.component';
+import { NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { AnTextComponent } from './components/text/text';
-import { AnPageTitleComponent } from './components/page-title.component';
 import { AnHeaderBlockComponent } from './block/header.block';
 import { AnViewPageBlockComponent } from './block/view-page.block';
 import { AnListBlockComponent } from './block/list.block';
-import { AnCheckboxComponent } from './components/checkbox.component';
 import { AnEoiBlockComponent } from './block/eoi.block';
 import { AnColumnBlockComponent } from './block/column.block';
 import { AnBookmarkBLockComponent } from './block/bookmark.block';
 import { AnCalloutBlockComponent } from './block/callout.block';
 import { AnTextBlockComponent } from './block/text.block';
 import { AnAssetWrapperBlockComponent } from './block/asset-wrapper.block';
-import { AnPageLinkComponent } from './components/link/page-link.component';
 import { AnTodoBlockComponent } from './block/todo.block';
 import { AnAliasBlockComponent } from './block/alias.block';
 import { AnContentTableBlockComponent } from './block/content-table.block';
@@ -44,28 +33,20 @@ import { AnGoogleDriveBlockComponent } from './block/google-drive.block';
 
 @Component({
   selector: 'an-block',
-  standalone: true,
   imports: [
     NgClass,
-    NgStyle,
     NgTemplateOutlet,
-    AnLazyImageComponent,
     NgComponentOutlet,
-    AnPageAsideComponent,
-    AnPageIconComponent,
     AnTextComponent,
-    AnPageTitleComponent,
     AnHeaderBlockComponent,
     AnViewPageBlockComponent,
     AnListBlockComponent,
-    AnCheckboxComponent,
     AnEoiBlockComponent,
     AnColumnBlockComponent,
     AnBookmarkBLockComponent,
     AnCalloutBlockComponent,
     AnTextBlockComponent,
     AnAssetWrapperBlockComponent,
-    AnPageLinkComponent,
     AnTodoBlockComponent,
     AnAliasBlockComponent,
     AnContentTableBlockComponent,

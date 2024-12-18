@@ -12,7 +12,6 @@ import { NotionBlockComponent } from '../notion-block/notion-block.component';
 
 @Component({
   selector: 'an-sync-pointer-block',
-  standalone: true,
   imports: [forwardRef(() => NotionBlockComponent)],
   template: `
     @if (params()) {

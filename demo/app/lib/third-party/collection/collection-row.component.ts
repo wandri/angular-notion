@@ -18,7 +18,6 @@ import { AnPropertyComponent } from './property/property.component';
 
 @Component({
   selector: 'an-collection-row',
-  standalone: true,
   imports: [NgClass, AnCollectionColumnTitleComponent, AnPropertyComponent],
   template: `
     @if (params()) {

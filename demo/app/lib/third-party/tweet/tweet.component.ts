@@ -14,7 +14,6 @@ import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'an-tweet',
-  standalone: true,
   imports: [],
   template: ` <div #tweetElement [attr.twElement]="'yes'"></div>`,
   styles: `

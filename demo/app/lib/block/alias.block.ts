@@ -12,7 +12,6 @@ import { AnPageTitleComponent } from '../components/page-title.component';
 
 @Component({
   selector: 'an-alias-block',
-  standalone: true,
   imports: [AnPageLinkComponent, AnPageTitleComponent],
   template: `
     @if (titleBlock()) {

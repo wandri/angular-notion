@@ -15,7 +15,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'an-google-drive-block',
-  standalone: true,
   imports: [NgClass, AnLinkComponent, AnGracefulImageComponent],
   template: `
     @if (params()) {

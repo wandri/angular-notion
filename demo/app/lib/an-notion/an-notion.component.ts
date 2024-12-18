@@ -14,7 +14,6 @@ import {
   NotionComponents,
   SearchNotionFn,
 } from '../type';
-import { BlockComponent } from '../block.component';
 import { NotionBlockComponent } from '../notion-block/notion-block.component';
 import { defaultComponents, defaultNotionContext } from '../default-value';
 import TimeAgo from 'javascript-time-ago';
@@ -22,8 +21,7 @@ import en from 'javascript-time-ago/locale/en.json';
 
 @Component({
   selector: 'an-notion',
-  standalone: true,
-  imports: [BlockComponent, NotionBlockComponent],
+  imports: [NotionBlockComponent],
   template: ` <an-notion-block [level]="0" /> `,
   styles: `
     :host {
@@ -100,216 +98,117 @@ export class AnNotionComponent {
 
   constructor() {
     TimeAgo.addLocale(en);
-    effect(
-      () => {
-        this.contextService.recordMap.set(this.recordMap());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.components.set({
-          ...defaultComponents,
-          ...this.components(),
-        });
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.mapPageUrl.set(this.mapPageUrl());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.mapImageUrl.set(this.mapImageUrl());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.searchNotion.set(this.searchNotion());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.isShowingSearch.set(this.isShowingSearch());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.onHideSearch.set(this.onHideSearch());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.rootPageId.set(this.rootPageId());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.rootDomain.set(this.rootDomain());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.fullPage.set(this.fullPage());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.darkMode.set(this.darkMode());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.previewImages.set(this.previewImages());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.forceCustomImages.set(this.forceCustomImages());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.showCollectionViewDropdown.set(
-          this.showCollectionViewDropdown(),
-        );
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.linkTableTitleProperties.set(
-          !!this.linkTableTitleProperties(),
-        );
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.isLinkCollectionToUrlProperty.set(
-          this.isLinkCollectionToUrlProperty(),
-        );
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.showTableOfContents.set(this.showTableOfContents());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.minTableOfContentsItems.set(
-          this.minTableOfContentsItems(),
-        );
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.defaultPageIcon.set(this.defaultPageIcon());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.defaultPageCover.set(this.defaultPageCover());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.defaultPageCoverPosition.set(
-          this.defaultPageCoverPosition(),
-        );
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.className.set(this.className());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.bodyClassName.set(this.bodyClassName());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.header.set(this.header());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.footer.set(this.footer());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.pageHeader.set(this.pageHeader());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.pageFooter.set(this.pageFooter());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.pageTitle.set(this.pageTitle());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.pageAside.set(this.pageAside());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.pageCover.set(this.pageCover());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.blockId.set(this.blockId());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.hideBlockId.set(this.hideBlockId());
-      },
-      { allowSignalWrites: true },
-    );
-    effect(
-      () => {
-        this.contextService.disableHeader.set(this.disableHeader());
-      },
-      { allowSignalWrites: true },
-    );
+    effect(() => {
+      this.contextService.recordMap.set(this.recordMap());
+    });
+    effect(() => {
+      this.contextService.components.set({
+        ...defaultComponents,
+        ...this.components(),
+      });
+    });
+    effect(() => {
+      this.contextService.mapPageUrl.set(this.mapPageUrl());
+    });
+    effect(() => {
+      this.contextService.mapImageUrl.set(this.mapImageUrl());
+    });
+    effect(() => {
+      this.contextService.searchNotion.set(this.searchNotion());
+    });
+    effect(() => {
+      this.contextService.isShowingSearch.set(this.isShowingSearch());
+    });
+    effect(() => {
+      this.contextService.onHideSearch.set(this.onHideSearch());
+    });
+    effect(() => {
+      this.contextService.rootPageId.set(this.rootPageId());
+    });
+    effect(() => {
+      this.contextService.rootDomain.set(this.rootDomain());
+    });
+    effect(() => {
+      this.contextService.fullPage.set(this.fullPage());
+    });
+    effect(() => {
+      this.contextService.darkMode.set(this.darkMode());
+    });
+    effect(() => {
+      this.contextService.previewImages.set(this.previewImages());
+    });
+    effect(() => {
+      this.contextService.forceCustomImages.set(this.forceCustomImages());
+    });
+    effect(() => {
+      this.contextService.showCollectionViewDropdown.set(
+        this.showCollectionViewDropdown(),
+      );
+    });
+    effect(() => {
+      this.contextService.linkTableTitleProperties.set(
+        !!this.linkTableTitleProperties(),
+      );
+    });
+    effect(() => {
+      this.contextService.isLinkCollectionToUrlProperty.set(
+        this.isLinkCollectionToUrlProperty(),
+      );
+    });
+    effect(() => {
+      this.contextService.showTableOfContents.set(this.showTableOfContents());
+    });
+    effect(() => {
+      this.contextService.minTableOfContentsItems.set(
+        this.minTableOfContentsItems(),
+      );
+    });
+    effect(() => {
+      this.contextService.defaultPageIcon.set(this.defaultPageIcon());
+    });
+    effect(() => {
+      this.contextService.defaultPageCover.set(this.defaultPageCover());
+    });
+    effect(() => {
+      this.contextService.defaultPageCoverPosition.set(
+        this.defaultPageCoverPosition(),
+      );
+    });
+    effect(() => {
+      this.contextService.className.set(this.className());
+    });
+    effect(() => {
+      this.contextService.bodyClassName.set(this.bodyClassName());
+    });
+    effect(() => {
+      this.contextService.header.set(this.header());
+    });
+    effect(() => {
+      this.contextService.footer.set(this.footer());
+    });
+    effect(() => {
+      this.contextService.pageHeader.set(this.pageHeader());
+    });
+    effect(() => {
+      this.contextService.pageFooter.set(this.pageFooter());
+    });
+    effect(() => {
+      this.contextService.pageTitle.set(this.pageTitle());
+    });
+    effect(() => {
+      this.contextService.pageAside.set(this.pageAside());
+    });
+    effect(() => {
+      this.contextService.pageCover.set(this.pageCover());
+    });
+    effect(() => {
+      this.contextService.blockId.set(this.blockId());
+    });
+    effect(() => {
+      this.contextService.hideBlockId.set(this.hideBlockId());
+    });
+    effect(() => {
+      this.contextService.disableHeader.set(this.disableHeader());
+    });
   }
 }

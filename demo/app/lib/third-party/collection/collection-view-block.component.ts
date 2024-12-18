@@ -32,7 +32,6 @@ import { AnCollectionViewComponent } from './collection-view.component';
 
 @Component({
   selector: 'an-collection-view-block',
-  standalone: true,
   imports: [
     AnPageIconComponent,
     NgClass,
@@ -171,54 +170,50 @@ export class AnCollectionViewBlockComponent implements AfterViewInit, OnInit {
   });
 
   constructor() {
-    effect(
-      () => {
-        const block = this.block() as
-          | CollectionViewBlock
-          | CollectionViewPageBlock;
-        const recordMap = this.ctx.recordMap();
+    effect(() => {
+      const block = this.block() as
+        | CollectionViewBlock
+        | CollectionViewPageBlock;
+      const recordMap = this.ctx.recordMap();
 
-        const viewIds = block.view_ids || [];
-        const collectionId = getBlockCollectionId(block, recordMap);
-        const defaultCollectionViewId = viewIds[0];
-        if (!this.collectionState()) {
-          this.collectionState.set({
-            collectionViewId: defaultCollectionViewId,
-          });
-        }
-
-        const collectionViewId =
-          (this.isMounted() &&
-            viewIds.find(
-              (id: string) => id === this.collectionState()?.collectionViewId,
-            )) ||
-          defaultCollectionViewId;
-
-        if (!collectionId) {
-          this.params.set(null);
-          return;
-        }
-        const collection = recordMap.collection[collectionId]?.value;
-        const collectionView =
-          recordMap.collection_view[collectionViewId]?.value;
-        const collectionData =
-          recordMap.collection_query[collectionId]?.[collectionViewId];
-
-        if (!(collection && collectionView && collectionData)) {
-          this.params.set(null);
-          return null;
-        }
-        this.params.set({
-          viewIds,
-          collectionViewId,
-          collection,
-          collectionView,
-          collectionData,
+      const viewIds = block.view_ids || [];
+      const collectionId = getBlockCollectionId(block, recordMap);
+      const defaultCollectionViewId = viewIds[0];
+      if (!this.collectionState()) {
+        this.collectionState.set({
+          collectionViewId: defaultCollectionViewId,
         });
+      }
+
+      const collectionViewId =
+        (this.isMounted() &&
+          viewIds.find(
+            (id: string) => id === this.collectionState()?.collectionViewId,
+          )) ||
+        defaultCollectionViewId;
+
+      if (!collectionId) {
+        this.params.set(null);
         return;
-      },
-      { allowSignalWrites: true },
-    );
+      }
+      const collection = recordMap.collection[collectionId]?.value;
+      const collectionView = recordMap.collection_view[collectionViewId]?.value;
+      const collectionData =
+        recordMap.collection_query[collectionId]?.[collectionViewId];
+
+      if (!(collection && collectionView && collectionData)) {
+        this.params.set(null);
+        return null;
+      }
+      this.params.set({
+        viewIds,
+        collectionViewId,
+        collection,
+        collectionView,
+        collectionData,
+      });
+      return;
+    });
   }
 
   ngOnInit() {

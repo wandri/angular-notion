@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'an-svg-check-icon',
-  standalone: true,
   imports: [],
   template: `
     <svg viewBox="0 0 14 14">

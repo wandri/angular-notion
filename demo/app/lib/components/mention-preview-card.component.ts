@@ -8,7 +8,6 @@ export function capitalizeFirstLetter(str: string) {
 
 @Component({
   selector: 'an-mention-preview-card',
-  standalone: true,
   imports: [NgComponentOutlet],
   template: `
     <div class="notion-external-subtitle">

@@ -5,7 +5,6 @@ import { AnSearchComponent } from './search.component';
 
 @Component({
   selector: 'an-header',
-  standalone: true,
   imports: [AnBreadcrumbComponent, AnSearchComponent],
   template: ` <header class="notion-header">
     <div class="notion-nav-header">

@@ -5,12 +5,11 @@ import {
   input,
 } from '@angular/core';
 import { NotionContextService } from '../context.service';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'an-graceful-image',
-  standalone: true,
-  imports: [NgClass, NgOptimizedImage],
+  imports: [NgClass],
   template: `
     @if (src()) {
       <div [ngClass]="className()">

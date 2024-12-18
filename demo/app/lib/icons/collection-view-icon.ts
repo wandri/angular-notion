@@ -4,7 +4,6 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { NgClass, NgComponentOutlet } from '@angular/common';
 import { AngularComponent } from '../type';
 import { AnSvgCollectionViewCalendarIconComponent } from './collection-view-table-calendar';
 import { AnSvgCollectionViewBoardIconComponent } from './collection-view-board-icon';
@@ -22,8 +21,7 @@ const iconMap: Record<string, AngularComponent> = {
 
 @Component({
   selector: 'an-collection-view-icon',
-  standalone: true,
-  imports: [NgClass, NgComponentOutlet],
+  imports: [],
   template: ` <ng-container
     *ngComponentOutlet="icon(); inputs: { className: className() }"
   />`,

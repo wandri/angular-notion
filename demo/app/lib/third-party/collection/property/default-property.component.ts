@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { NotionContextService } from '../../../context.service';
-import { NgClass, NgComponentOutlet } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { AnTextComponent } from '../../../components/text/text';
 import { AnPageLinkComponent } from '../../../components/link/page-link.component';
 import { AnPageTitleComponent } from '../../../components/page-title.component';
@@ -25,9 +25,7 @@ import { evalFormula } from './eval-formula';
 
 @Component({
   selector: 'an-default-property',
-  standalone: true,
   imports: [
-    NgComponentOutlet,
     NgClass,
     AnTextComponent,
     AnPageLinkComponent,

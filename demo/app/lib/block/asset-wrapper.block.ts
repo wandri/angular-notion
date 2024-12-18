@@ -15,7 +15,6 @@ import { AnAssetComponent } from '../components/asset.component';
 
 @Component({
   selector: 'an-asset-wrapper-block',
-  standalone: true,
   imports: [
     AnPageLinkComponent,
     NgClass,

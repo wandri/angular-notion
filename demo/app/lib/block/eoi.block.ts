@@ -16,13 +16,7 @@ import { AnLinkComponent } from '../components/link/link.component';
 
 @Component({
   selector: 'an-eoi-block',
-  standalone: true,
-  imports: [
-    NgComponentOutlet,
-    AnGithubIconComponent,
-    AnMentionPreviewCardComponent,
-    AnLinkComponent,
-  ],
+  imports: [NgComponentOutlet, AnMentionPreviewCardComponent, AnLinkComponent],
   template: `
     @if (params()) {
       <an-link

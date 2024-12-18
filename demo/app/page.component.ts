@@ -16,7 +16,6 @@ import { AnCollectionComponent } from './lib/third-party/collection/collection.c
 
 @Component({
   selector: 'an-page-demo',
-  standalone: true,
   imports: [AnNotionComponent],
   template: `
     @if (recordMap()) {
@@ -51,15 +50,12 @@ export class PageComponent {
   private notionClient = inject(NotionClientService);
 
   constructor() {
-    effect(
-      () => {
-        const pageId = this.pageId() ?? this.defaultId;
-        this.notionClient.getPage(pageId).subscribe((page) => {
-          this.recordMap.set(page);
-          this.title.set(getPageTitle(page));
-        });
-      },
-      { allowSignalWrites: true },
-    );
+    effect(() => {
+      const pageId = this.pageId() ?? this.defaultId;
+      this.notionClient.getPage(pageId).subscribe((page) => {
+        this.recordMap.set(page);
+        this.title.set(getPageTitle(page));
+      });
+    });
   }
 }

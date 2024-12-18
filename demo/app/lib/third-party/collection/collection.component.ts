@@ -12,7 +12,6 @@ import { AnCollectionRowComponent } from './collection-row.component';
 
 @Component({
   selector: 'an-collection',
-  standalone: true,
   imports: [AnCollectionViewBlockComponent, AnCollectionRowComponent],
   template: `
     @if (isReady()) {

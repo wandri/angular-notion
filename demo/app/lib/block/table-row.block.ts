@@ -13,7 +13,6 @@ import { Color } from 'notion-types/build/core';
 
 @Component({
   selector: 'an-table-row-block',
-  standalone: true,
   imports: [AnTextComponent, NgClass],
   template: `
     @if (params()) {

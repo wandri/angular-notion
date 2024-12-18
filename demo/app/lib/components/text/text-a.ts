@@ -1,7 +1,4 @@
-import { Component, computed, forwardRef, inject, input } from '@angular/core';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { AnGracefulImageComponent } from '../graceful-image.component';
-import { AnPageTitleComponent } from '../page-title.component';
+import { Component, computed, inject, input } from '@angular/core';
 import { NotionContextService } from '../../context.service';
 import { LinkFormat, SubDecoration } from 'notion-types/build/core';
 import { parsePageId } from 'notion-utils';
@@ -19,14 +16,7 @@ import { AnPageLinkComponent } from '../link/page-link.component';
       <ng-content />
     </an-page-link>
   `,
-  standalone: true,
-  imports: [
-    NgComponentOutlet,
-    AnGracefulImageComponent,
-    forwardRef(() => AnPageTitleComponent),
-    NgTemplateOutlet,
-    AnPageLinkComponent,
-  ],
+  imports: [AnPageLinkComponent],
   styles: `
     :host {
       display: contents;
