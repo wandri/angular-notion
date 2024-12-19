@@ -8,7 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:angular-notion": "node dist/angular-notion/server/server.mjs"
+    "serve:ssr:angular-notion": "node dist/angular-notion/server/server.mjs",
+    "publish": "ng deploy --base-href=/angular-notion/"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +42,7 @@
     "@types/format-number": "^3.0.0",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "angular-cli-ghpages": "^2.0.3",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

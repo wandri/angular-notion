@@ -35,6 +35,7 @@ import { PreviewImage } from 'notion-types/build/maps';
           [ngStyle]="style()"
           [style.object-fit]="'cover'"
           [ngClass]="className()"
+          priority="1"
         />
       } @else {
         <img

@@ -4,6 +4,7 @@ import {
   effect,
   inject,
   input,
+  PLATFORM_ID,
   signal,
 } from '@angular/core';
 import { AnNotionComponent } from './lib/an-notion/an-notion.component';
@@ -13,6 +14,7 @@ import { getPageTitle } from 'notion-utils';
 import { AnPdfComponent } from './lib/third-party/pdf.component';
 import { AnTweetComponent } from './lib/third-party/tweet/tweet.component';
 import { AnCollectionComponent } from './lib/third-party/collection/collection.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'an-page-demo',

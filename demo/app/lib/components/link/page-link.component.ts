@@ -10,11 +10,12 @@ import {
 } from '@angular/core';
 import { NgClass, NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { AngularComponent } from '../../type';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'an-page-link',
   host: { ngSkipHydration: 'true' },
-  imports: [NgTemplateOutlet, NgComponentOutlet, NgClass],
+  imports: [NgTemplateOutlet, NgComponentOutlet, NgClass, RouterLink],
   template: ` @if (component()) {
       <ng-container
         *ngComponentOutlet="
@@ -29,7 +30,7 @@ import { AngularComponent } from '../../type';
     } @else {
       <a
         [ngClass]="className()"
-        [href]="href() ?? null"
+        [routerLink]="href() ?? null"
         [attr.type]="type() ?? null"
         [attr.target]="target() ?? null"
         [attr.rel]="rel() ?? null"

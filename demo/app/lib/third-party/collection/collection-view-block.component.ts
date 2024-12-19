@@ -238,7 +238,6 @@ export class AnCollectionViewBlockComponent implements AfterViewInit, OnInit {
   }
 
   onChangeView(collectionViewId: string) {
-    console.log(collectionViewId);
     this.collectionState.set({
       ...this.collectionState(),
       collectionViewId,
